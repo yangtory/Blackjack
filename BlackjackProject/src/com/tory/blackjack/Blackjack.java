@@ -6,7 +6,7 @@ public class Blackjack {
 	public static void main(String[] args) {
 		
 		CardService cardService = new CardService();
-		cardService.cardDeck();
+		cardService.makeDeck();
 	}
 
 }
