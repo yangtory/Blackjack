@@ -1,6 +1,7 @@
 package com.tory.blackjack.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.tory.blackjack.model.CardDto;
@@ -12,36 +13,43 @@ public class CardService {
 
 	// 초기화
 	public CardService() {
-		cardDto = new CardDto();
-	}
-
-	public void blackJack() {
-		startGame();
-	}
-
-	public void startGame() {
-		makeDeck();
-	}
-
-	// 카드 만들기
-	// deck 초기화, 매개변수로 dto 변수에 할당할수 있게 method 만들기 
-	// deck 리스트에 넣기 
-	public void card(String value, String type) {
 		deck = new ArrayList<CardDto>();
-		cardDto.type = type; 
-		cardDto.value = value;
-		deck.add(cardDto);
-		System.out.println(deck);
-	}// end card
-	
+	}
+
+	// 카드 만들면서 점수 넣어주기
 	public void makeDeck() {
 		String[] values = { "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "K", "Q", "J" };
 		String[] types = { "♠", "♥", "♣", "◆" };
 
+		int intValue = 0;
 		for (int i = 0; i < types.length; i++) {
 			for (int j = 0; j < values.length; j++) {
-				card(values[j], types[i]);
+				try {
+					intValue = Integer.valueOf(values[j]);
+				} catch (Exception e) {
+					if (values[j].equals("A")) {
+						intValue = 1;
+					} else {
+						intValue = 10;
+					}
+				}
+				// 먼저 초기화 해놓고 불러오는게 안돼서 이렇게
+				deck.add(new CardDto(types[i], values[j], intValue));
 			}
-		}
+		} // for end
 	}// end makeDeck
+
+	// 셔플
+	public void shuffleDeck() {
+		Collections.shuffle(deck);
+		System.out.println("전체 카드수량 : " + deck.size());
+	}
+
+	// 카드 1장을 주면 deck 에서 사라짐
+	public void deal() {
+		int rnd = (int) (Math.random() * deck.size()); 
+		deck.remove(rnd);
+		System.out.println(deck.remove(rnd));
+		System.out.println("남은 카드수량 : " + deck.size());
+	}
 }

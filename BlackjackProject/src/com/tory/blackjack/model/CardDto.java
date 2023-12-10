@@ -1,17 +1,23 @@
 package com.tory.blackjack.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class CardDto {
 	
-	public String deck;
+//	public String deck;
 	public String type;
 	public String value;
+	public int intvalue;
 	
-	//service 에서 만든 카드 이렇게 표시해주세요 
-	public String toString() {
-		return value + type;
+	public CardDto(String type, String value, int intvalue) {
+		this.type = type;
+		this.value = value;
+		this.intvalue = intvalue;
 	}
+	
+	
+	//카드 이렇게 표시해주세요 
+	public String toString() {
+		return value + type + " 점수:" + intvalue;
+	}
+	
 
 }
