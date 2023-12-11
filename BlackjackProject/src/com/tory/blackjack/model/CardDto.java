@@ -13,7 +13,6 @@ public class CardDto {
 		this.intvalue = intvalue;
 	}
 	
-	
 	//카드 이렇게 표시해주세요 
 	public String toString() {
 		return value + type + " 점수:" + intvalue;

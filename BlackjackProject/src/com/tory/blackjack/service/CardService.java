@@ -46,9 +46,9 @@ public class CardService {
 	}
 
 	// 카드 1장을 주면 deck 에서 사라짐
-	public void deal() {
-		int rnd = (int) (Math.random() * deck.size()); 
-		deck.remove(rnd);
+	public void getCard() {
+		int rnd = (int) (Math.random() * deck.size());
+//		deck.remove(rnd); 프린트할때도 한 장 빠져서 계속 50개였음
 		System.out.println(deck.remove(rnd));
 		System.out.println("남은 카드수량 : " + deck.size());
 	}

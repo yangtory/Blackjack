@@ -14,7 +14,8 @@ public class Blackjack {
 		
 		cardService.makeDeck();
 		cardService.shuffleDeck();
-		cardService.deal();
+		cardService.getCard();
+		cardService.getCard();
 		PlayerService p1 = new PlayerService();
 		
 		
