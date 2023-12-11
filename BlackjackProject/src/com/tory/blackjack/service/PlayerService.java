@@ -1,25 +1,31 @@
 package com.tory.blackjack.service;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.tory.blackjack.model.PlayerDto;
 
-import com.tory.blackjack.model.CardDto;
-
-public class PlayerService {
-	private List<CardService>card = null;
+public class PlayerService{
+	private CardService cardS = null;
+	private PlayerDto playerDto = null;
 	
 	public PlayerService() {
-		card = new ArrayList<CardService>();
+		cardS = new CardService();
+		playerDto = new PlayerDto();
 	}
 	
-	//카드 1장 얻기 
-	public void getCard(CardService deck) {
-		this.card.add(deck);
-		// CardDto의 카드를 이 클래스의 카드에 넣기 
+	//처음 게임 카드 2장 얻기 
+	public void firstGetCard() {
+		cardS.makeDeck();
+		playerDto.dealer.add(cardS.deal());
+		playerDto.dealer.add(cardS.deal());
+		System.out.println("딜러의 카드");
+		System.out.println("");
+		playerDto.player.add(cardS.deal());
+		playerDto.player.add(cardS.deal());
+		System.out.println("플레이어의 카드"+ playerDto.player);
 	}
 	
-	public void printCard() {
-		System.out.println(card);
+	public void getCard() {
+		cardS.makeDeck();
+		playerDto.player.add(cardS.deal());
+		System.out.println("플레이어의 카드"+ playerDto.player);
 	}
-
 }
