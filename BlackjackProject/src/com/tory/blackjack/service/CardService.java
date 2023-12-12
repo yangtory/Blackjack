@@ -8,16 +8,12 @@ import com.tory.blackjack.model.CardDto;
 
 public class CardService {
 	// 선언
-	protected CardDto cardDto = null;
-	protected List<CardDto> deck = null;
-	protected List<String> player = null;
-	protected List<String> dealer = null;
+	private CardDto cardDto = null;
+	private List<CardDto> deck = null;
 
 	// 초기화
 	public CardService() {
 		deck = new ArrayList<CardDto>();
-		player = new ArrayList<String>();
-		dealer = new ArrayList<String>();
 	}
 
 	// 카드 만들면서 점수 넣어주기

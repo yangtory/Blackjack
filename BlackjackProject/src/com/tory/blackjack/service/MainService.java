@@ -13,11 +13,10 @@ public class MainService {
 	}
 	
 	public void startGame() {
-		cardService.makeDeck();
+ 		cardService.makeDeck();
 		cardService.shuffleDeck();
 		playerService.firstGetCard();
-		playerService.getCard();
-		ruleService.select();
+//		ruleService.select();
 	}
 	
 

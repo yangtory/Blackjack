@@ -4,21 +4,21 @@ import java.util.Scanner;
 
 import com.tory.blackjack.model.RuleDto;
 
-public class RuleService {
-	private RuleDto ruleDto = null;
+public class RuleService{
 	private Scanner scan = null;
-	private PlayerService playerService = null;
+	private PlayerService playerS = null;
+	private CardService cardS = null;
 
 	public RuleService() {
-		ruleDto = new RuleDto();
 		scan = new Scanner(System.in);
-		playerService = new PlayerService();
+		playerS = new PlayerService();
+		cardS = new CardService();
 	}
 
 	// stop 입력받기
 	
 	
-	public void select() {
+	public boolean select() {
 		while (true) {
 			System.out.print("Hit 하려면 1, STOP 하려면 0 을 입력하세요 >>  ");
 			String str = scan.nextLine();
@@ -30,9 +30,10 @@ public class RuleService {
 				continue;
 			}
 			if (intStr == 1) {
-				playerService.getCard();
-				continue;
+				return true;
+
 			} else if (intStr == 0) {
+				return false;
 				// 점수를 계산하고 게임이 종료되는 메서드 
 			}
 		} // end while
