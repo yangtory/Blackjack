@@ -16,7 +16,6 @@ public class MainService {
  		cardService.makeDeck();
 		cardService.shuffleDeck();
 		playerService.firstGetCard();
-//		ruleService.select();
 	}
 	
 

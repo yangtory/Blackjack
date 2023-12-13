@@ -1,48 +1,50 @@
 package com.tory.blackjack.service;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.tory.blackjack.model.PlayerDto;
 
-public class PlayerService extends RuleService {
+public class PlayerService {
 	private CardService cardS = null;
-	protected List<String> playerHand = null;
-	protected List<String> dealerHand = null;
-//	private RuleService ruleS = null;
+	private PlayerDto dto = null;
+	private RuleService ruleS = null;
 
 	public PlayerService() {
 		cardS = new CardService();
-		playerHand = new ArrayList<String>();
-		dealerHand = new ArrayList<String>();
-//		ruleS = new RuleService();
+		dto = new PlayerDto();
+		ruleS = new RuleService();
 	}
 
-	// 처음 게임 카드 2장 얻고 hit,stop 선택
+	// 처음 게임 카드 2장 얻고 hit 하면 getCard() 실행
 	public void firstGetCard() {
+		int playerScore = 0;
+		int dealerScore = 0;
 		cardS.makeDeck();
-		dealerHand.add(cardS.deal());
-		dealerHand.add(cardS.deal());
+		dto.dealerHand.add(cardS.deal());
+		dto.dealerHand.add(cardS.deal());
 		System.out.println("딜러의 카드");
-		System.out.printf("[ ?, %s]\n", dealerHand.get(1));
+		System.out.printf("[ ?, %s]\n", dto.dealerHand.get(1));
+		for(int i = 0 ; i < dto.dealerHand.size() ; i++) {
+			int intvalue = Integer.valueOf(dto.dealerHand.get(i));
+			dealerScore = intvalue;
+		}
+		System.out.println(dealerScore);
 
-		playerHand.add(cardS.deal());
-		playerHand.add(cardS.deal());
+		dto.playerHand.add(cardS.deal());
+		dto.playerHand.add(cardS.deal());
 		System.out.println("플레이어의 카드");
-		System.out.println(playerHand);
+		System.out.println(dto.playerHand);
 
-//		while (true) {
-//			select();
-//			if (select() == true) {
-//				this.getCard();
-//			}
-//		}
+		while (true) {
+			if (ruleS.select() == true) {
+				this.getCard();
+			}
+		}
 	}
 
 	// 카드 한장 받기
 	public void getCard() {
-		playerHand.add(cardS.deal());
+		dto.playerHand.add(cardS.deal());
 		System.out.println("플레이어의 카드");
-		System.out.println(playerHand);
-		System.out.println(playerHand.size());
+		System.out.println(dto.playerHand);
 	}
 }
 

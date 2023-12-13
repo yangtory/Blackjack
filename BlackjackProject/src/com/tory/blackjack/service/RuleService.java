@@ -2,16 +2,16 @@ package com.tory.blackjack.service;
 
 import java.util.Scanner;
 
-import com.tory.blackjack.model.RuleDto;
+import com.tory.blackjack.model.PlayerDto;
 
 public class RuleService{
 	private Scanner scan = null;
-	private PlayerService playerS = null;
+	private PlayerDto playerDto = null;
 	private CardService cardS = null;
 
 	public RuleService() {
 		scan = new Scanner(System.in);
-		playerS = new PlayerService();
+		playerDto = new PlayerDto();
 		cardS = new CardService();
 	}
 
@@ -38,5 +38,8 @@ public class RuleService{
 			}
 		} // end while
 	}// end select
+	
+	public void dealerRule() {
+	}
 
 }
