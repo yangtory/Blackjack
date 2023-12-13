@@ -1,13 +1,18 @@
 package com.tory.blackjack.service;
 
+import java.util.List;
+
+import com.tory.blackjack.model.CardDto;
 import com.tory.blackjack.model.PlayerDto;
 
 public class PlayerService {
+	private CardDto cardDto = null;
 	private CardService cardS = null;
 	private PlayerDto dto = null;
 	private RuleService ruleS = null;
 
 	public PlayerService() {
+		cardDto = new CardDto();
 		cardS = new CardService();
 		dto = new PlayerDto();
 		ruleS = new RuleService();
@@ -15,23 +20,21 @@ public class PlayerService {
 
 	// 처음 게임 카드 2장 얻고 hit 하면 getCard() 실행
 	public void firstGetCard() {
-		int playerScore = 0;
-		int dealerScore = 0;
+
 		cardS.makeDeck();
 		dto.dealerHand.add(cardS.deal());
 		dto.dealerHand.add(cardS.deal());
 		System.out.println("딜러의 카드");
-		System.out.printf("[ ?, %s]\n", dto.dealerHand.get(1));
-		for(int i = 0 ; i < dto.dealerHand.size() ; i++) {
-			int intvalue = Integer.valueOf(dto.dealerHand.get(i));
-			dealerScore = intvalue;
-		}
-		System.out.println(dealerScore);
+		System.out.println(dto.dealerHand); 
+//		System.out.printf("[ ?, %s]\n", dto.dealerHand.get(1));
+		System.out.println("점수 합 : " + cardS.dealerValue());
+		
 
 		dto.playerHand.add(cardS.deal());
 		dto.playerHand.add(cardS.deal());
 		System.out.println("플레이어의 카드");
 		System.out.println(dto.playerHand);
+//		System.out.println("점수 합 : " + cardS.sumValue());
 
 		while (true) {
 			if (ruleS.select() == true) {
@@ -45,7 +48,14 @@ public class PlayerService {
 		dto.playerHand.add(cardS.deal());
 		System.out.println("플레이어의 카드");
 		System.out.println(dto.playerHand);
-	}
+	} //end getCard
+	
+//	public int sumScore() {
+//		int sumValue = 0;
+//			int cardValue = cardS.getValue();
+//			sumValue += cardValue;
+//		return sumValue;
+//	} //end getCard
 }
 
 // 카드 그림을 배열에 담기

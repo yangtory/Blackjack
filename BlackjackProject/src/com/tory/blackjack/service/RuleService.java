@@ -39,7 +39,8 @@ public class RuleService{
 		} // end while
 	}// end select
 	
-	public void dealerRule() {
+	public void dealerScore() {
+		
 	}
 
 }
