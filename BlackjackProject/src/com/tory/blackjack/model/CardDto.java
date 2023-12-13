@@ -1,8 +1,6 @@
 package com.tory.blackjack.model;
 
-import com.tory.blackjack.service.CardService;
-
-public class CardDto extends CardService {
+public class CardDto {
 
 //	public String deck;
 	public String type;
@@ -22,7 +20,8 @@ public class CardDto extends CardService {
 	}
 	
 	public int sumValue() {
-
+		sumvalue = intvalue;
+		sumvalue += intvalue;
 		return sumvalue;
 	}
 

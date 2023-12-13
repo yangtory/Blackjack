@@ -15,7 +15,6 @@ public class PlayerDto {
 	public PlayerDto() {
 		playerHand = new ArrayList<String>();
 		dealerHand = new ArrayList<String>();
-		card = new CardService();
 	}
 	
 }
