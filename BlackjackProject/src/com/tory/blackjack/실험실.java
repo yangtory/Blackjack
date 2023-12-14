@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class 실험실 {
-
 	public static String[] cardPrint(String value, String type) {
+				
 		String[] cardA = { 
 				String.format("┌──────┐ "), 
 				String.format("│  %1s   │ ", type), 

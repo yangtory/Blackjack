@@ -38,9 +38,9 @@ public class CardService {
 	}
 
 	// 점수 산정 
-	// sumHandValue() 만들기 전 for문에 사용할 String card를 매개변수로 사용
+	// 각 카드의 점수를 정해줌, 매개변수에 card를 넣고 card 한 장의 점수를 정할수 있도록함
 	public int getCardValue(String card) {
-		String value = card.split(" ")[0]; // type 떼고 value 만 가져오기
+		String value = card.split(" ")[0]; // 카드를 ""로 split 하고 첫번째 요소만 가져옴, value 만 가져오기
 		if (value.equals("A")) {
 			return 1;
 		} else if (value.equals("K") || value.equals("Q") || value.equals("J")) {
@@ -50,8 +50,11 @@ public class CardService {
 		}
 	}
 
-	// 매개변수에 리스트를 넣어서 확장 for 사용하고 총합을 구함
-	public int sumHandValue(List<String> hand) {
+	// 매개변수에 플레이어의 hand 리스트를 넣어서 
+	// 그 리스트에 있는 요소들을 card 에 넣고 getCardValue() 매개변수에 그 card 를 넣어
+	// 카드 점수 산정을 한다 그리고
+	// 각 카드의 value 를 합해 리턴한다
+		public int sumHandValue(List<String> hand) {
 		int value = 0;
 		for (String card : hand) {
 			value += getCardValue(card);
@@ -81,7 +84,7 @@ public class CardService {
 		if (showDealerHand) {
 			System.out.println(playerDto.dealerHand);
 			System.out.println("점수  " + sumHandValue(playerDto.dealerHand));
-		} else {
+		} else { //false 이면 딜러 카드 중 1번 요소만 보여주기
 			System.out.printf("[ ? , %s]\n", playerDto.dealerHand.get(1));
 		}
 		System.out.println("[ 플레이어의 카드 ] ");
@@ -95,6 +98,7 @@ public class CardService {
 		while (true) {
 			int dealerScore = sumHandValue(playerDto.dealerHand);
 			int playerScore = sumHandValue(playerDto.playerHand);
+			
 			System.out.print("Hit 하려면 1, STOP 하려면 0 을 입력하세요 >>  ");
 			String str = scan.nextLine();
 			int intStr = 0;
