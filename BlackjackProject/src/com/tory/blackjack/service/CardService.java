@@ -37,7 +37,7 @@ public class CardService {
 		Collections.shuffle(deck);
 	}
 
-	// 점수 산저
+	// 점수 산정 
 	// sumHandValue() 만들기 전 for문에 사용할 String card를 매개변수로 사용
 	public int getCardValue(String card) {
 		String value = card.split(" ")[0]; // type 떼고 value 만 가져오기
