@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Scanner;
 import com.tory.blackjack.utils.AnsiConsol;
 import com.tory.blackjack.utils.Line;
-import com.tory.blackjack.model.CardDto;
 import com.tory.blackjack.model.PlayerDto;
 
 public class CardService {
@@ -38,6 +37,7 @@ public class CardService {
 		Collections.shuffle(deck);
 	}
 
+	// 점수 산저
 	// sumHandValue() 만들기 전 for문에 사용할 String card를 매개변수로 사용
 	public int getCardValue(String card) {
 		String value = card.split(" ")[0]; // type 떼고 value 만 가져오기
@@ -105,7 +105,7 @@ public class CardService {
 				continue;
 			}
 			if (intStr < 0 || 1 < intStr) {
-				System.out.println("1 과 0 만 입력해주세요");
+				System.out.println("*** 1 과 0 만 입력해주세요");
 				continue;
 			}
 
@@ -113,28 +113,33 @@ public class CardService {
 				playerDto.playerHand.add(getCard());
 				this.printHand(false);
 			}
+			
 			if (sumHandValue(playerDto.dealerHand) < 17) {
 				playerDto.dealerHand.add(getCard());
 			}
 			if (sumHandValue(playerDto.playerHand) >= 21) {
 				System.out.println("** 플레이어가 21 초과, 패배 ** ");
 				break;
-			} else if (intStr == 0) {
+			}
 
+			if (intStr == 0) {
 				if (dealerScore > 21) {
 					System.out.println("** 딜러가 21 초과, 플레이어 승리 **");
 					Line.dLine(50);
 					break;
-				} else if (dealerScore < playerScore) {
+				}
+				if (dealerScore < playerScore) {
 					System.out.println("** 플레이어 승리 **");
 					Line.dLine(50);
 					break;
-				} else if (dealerScore > playerScore) {
+				}
+				if (dealerScore > playerScore) {
 					System.out.println("** 패배, 딜러 승리 **");
 					Line.dLine(50);
 					break;
-				} else {
-					System.out.println("무승부입니다");
+				}
+				if (dealerScore == playerScore) {
+					System.out.println("** 무승부입니다 **");
 					break;
 				}
 			}
@@ -143,19 +148,29 @@ public class CardService {
 		printHand(true);
 	}
 
+	// 딜러, 플레이어 리스트 초기화 하기
+	public void reset() {
+		playerDto.dealerHand.clear();
+		playerDto.playerHand.clear();
+	}
+
+	// 재시작
 	public void restart() {
-		System.out.println("다시 하려면 1, 끝내려면 0 을 입력하세요");
+		System.out.print("*** 다시 하려면 1, 끝내려면 0 을 입력하세요 >> ");
 		String str = scan.nextLine();
 		while (true) {
 			if (str.equals("1")) {
+				reset();
 				firstGetCard();
 				printHand(false);
 				playerSelect();
+				restart();
 			}
 			if (str.equals("0")) {
 				System.out.println(" 게임 끝! ");
-				break;
+				Line.dLine(50);
 			}
+			break;
 		}
 	}
 }

@@ -19,7 +19,5 @@ public class MainService {
 		cardService.printHand(false);
 		cardService.playerSelect();
 		cardService.restart();
-	
 	}
-
 }
