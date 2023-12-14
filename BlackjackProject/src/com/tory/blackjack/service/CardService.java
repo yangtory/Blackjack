@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
-
-import javax.swing.plaf.synth.SynthScrollBarUI;
-
+import com.tory.blackjack.utils.AnsiConsol;
+import com.tory.blackjack.utils.Line;
 import com.tory.blackjack.model.CardDto;
 import com.tory.blackjack.model.PlayerDto;
 
@@ -25,6 +24,8 @@ public class CardService {
 	public void deck() {
 		String[] values = { "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "K", "Q", "J" };
 		String[] types = { "♠", "♥", "♣", "◆" };
+		types[1] = AnsiConsol.RED("♥");
+		types[3] = AnsiConsol.RED("◆");
 		for (String value : values) {
 			for (String type : types) {
 				deck.add(value + " " + type);
@@ -74,19 +75,19 @@ public class CardService {
 		return card;
 	}
 
-	// boolean을 이용해 false 일때 딜러 카드 숨기기
+	// boolean 으로 false 일때 딜러 카드 숨기기
 	public void printHand(boolean showDealerHand) {
-		System.out.println("< 딜러의 카드 > ");
+		System.out.println("[ 딜러의 카드 ] ");
 		if (showDealerHand) {
 			System.out.println(playerDto.dealerHand);
-			System.out.println(sumHandValue(playerDto.dealerHand));
+			System.out.println("점수  " + sumHandValue(playerDto.dealerHand));
 		} else {
 			System.out.printf("[ ? , %s]\n", playerDto.dealerHand.get(1));
 		}
-		System.out.println("< 플레이어의 카드 > ");
+		System.out.println("[ 플레이어의 카드 ] ");
 		System.out.println(playerDto.playerHand);
-		System.out.println("현재 점수 : " + sumHandValue(playerDto.playerHand));
-		System.out.println("-".repeat(50));
+		System.out.println("점수  " + sumHandValue(playerDto.playerHand));
+		Line.sLine(50);
 	}
 
 	// hit, stop 에 따라 게임진행
@@ -101,6 +102,10 @@ public class CardService {
 				intStr = Integer.valueOf(str);
 			} catch (Exception e) {
 				System.out.println("*** 정확히 입력해주세요");
+				continue;
+			}
+			if (intStr < 0 || 1 < intStr) {
+				System.out.println("1 과 0 만 입력해주세요");
 				continue;
 			}
 
@@ -118,15 +123,15 @@ public class CardService {
 
 				if (dealerScore > 21) {
 					System.out.println("** 딜러가 21 초과, 플레이어 승리 **");
-					System.out.println("=".repeat(50));
+					Line.dLine(50);
 					break;
 				} else if (dealerScore < playerScore) {
 					System.out.println("** 플레이어 승리 **");
-					System.out.println("=".repeat(50));
+					Line.dLine(50);
 					break;
 				} else if (dealerScore > playerScore) {
 					System.out.println("** 패배, 딜러 승리 **");
-					System.out.println("=".repeat(50));
+					Line.dLine(50);
 					break;
 				} else {
 					System.out.println("무승부입니다");
@@ -136,5 +141,21 @@ public class CardService {
 		} // end while
 		System.out.println("<게임결과>");
 		printHand(true);
+	}
+
+	public void restart() {
+		System.out.println("다시 하려면 1, 끝내려면 0 을 입력하세요");
+		String str = scan.nextLine();
+		while (true) {
+			if (str.equals("1")) {
+				firstGetCard();
+				printHand(false);
+				playerSelect();
+			}
+			if (str.equals("0")) {
+				System.out.println(" 게임 끝! ");
+				break;
+			}
+		}
 	}
 }
