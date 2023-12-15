@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+
+import com.tory.blackjack.model.CardDto;
+import com.tory.blackjack.model.PlayerDto;
 import com.tory.blackjack.utils.AnsiConsol;
 import com.tory.blackjack.utils.Line;
-import com.tory.blackjack.model.PlayerDto;
 
 public class CardService {
 	private PlayerDto playerDto = null;
@@ -119,6 +121,7 @@ public class CardService {
 			}
 			
 			if (sumHandValue(playerDto.dealerHand) < 17) {
+				System.out.println("** 딜러가 카드를 가져갑니다");
 				playerDto.dealerHand.add(getCard());
 			}
 			if (sumHandValue(playerDto.playerHand) >= 21) {
