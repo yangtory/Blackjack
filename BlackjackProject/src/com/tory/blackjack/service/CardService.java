@@ -38,7 +38,7 @@ public class CardService {
 	}
 
 	// 점수 산정 
-	// 각 카드의 점수를 정해줌, 매개변수에 card를 넣고 card 한 장의 점수를 정할수 있도록함
+	// 각 카드의 점수를 정해줌, 매개변수에 card 를 넣고 card 한 장의 점수를 알수있도록함
 	public int getCardValue(String card) {
 		String value = card.split(" ")[0]; // 카드를 ""로 split 하고 첫번째 요소만 가져옴, value 만 가져오기
 		if (value.equals("A")) {
@@ -71,7 +71,7 @@ public class CardService {
 		playerDto.playerHand.add(getCard());
 	}
 
-	// 카드 1장 받기
+	// 카드 1장 받고 덱에서 그 카드 지우기 
 	public String getCard() {
 		int rndCard = (int) (Math.random() * deck.size());
 		String card = deck.remove(rndCard) + "";

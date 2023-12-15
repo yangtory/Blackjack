@@ -13,11 +13,12 @@ public class MainService {
 				+ "\t\t블랙잭 카드게임\n" 
 				+ "╰ ◟◞ ͜ ◟◞ ͜ ◟◞ ͜ ◟◞ ͜ ◟◞ ͜ ◟◞ ͜ ◟◞ ͜ ◟◞ ͜ ◟◞ ͜ ◟◞ ͜ ◟◞ ͜ ◟◞ ╯\r\n"
 				+ "/}__/}\r\n"
-				+ "( • ▼•)\r\n");
+				+ "( • ▼•)");
 		System.out.println("=".repeat(50));
 		cardService.firstGetCard();
 		cardService.printHand(false);
 		cardService.playerSelect();
 		cardService.restart();
+		
 	}
 }

@@ -1,4 +1,4 @@
-package com.tory.blackjack;
+package com.tory.blackjack.utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,5 +35,6 @@ public class 실험실 {
 			}
 			System.out.println();
 		}
+		//이거 덱에 어떻게 넣음????..
 	}
 }
