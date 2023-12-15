@@ -10,6 +10,7 @@ import com.tory.blackjack.model.PlayerDto;
 import com.tory.blackjack.utils.AnsiConsol;
 import com.tory.blackjack.utils.Line;
 
+// playersevice 를 나눴으면 좋겟다
 public class CardService {
 	private PlayerDto playerDto = null;
 	private List<String> deck = null;
@@ -103,7 +104,7 @@ public class CardService {
 			
 			System.out.print("Hit 하려면 1, STOP 하려면 0 을 입력하세요 >>  ");
 			String str = scan.nextLine();
-			int intStr = 0;
+			int intStr = 0; // 이 변수가 하는 일 : hit 인지 stop 인지를 알려주는 역할  
 			try {
 				intStr = Integer.valueOf(str);
 			} catch (Exception e) {
@@ -123,7 +124,7 @@ public class CardService {
 			if (sumHandValue(playerDto.dealerHand) < 17) {
 				System.out.println("** 딜러가 카드를 가져갑니다");
 				playerDto.dealerHand.add(getCard());
-			}
+			} // 여기에 딜러의 점수가 21 초과일때 ,승리가 없음
 			if (sumHandValue(playerDto.playerHand) >= 21) {
 				System.out.println("** 플레이어가 21 초과, 패배 ** ");
 				break;
