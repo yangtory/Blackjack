@@ -40,7 +40,7 @@ public class CardService {
 		Collections.shuffle(deck);
 	}
 
-	// 점수 산정 
+	// 점수 산정
 	// 각 카드의 점수를 정해줌, 매개변수에 card 를 넣고 card 한 장의 점수를 알수있도록함
 	public int getCardValue(String card) {
 		String value = card.split(" ")[0]; // 카드를 ""로 split 하고 첫번째 요소만 가져옴, value 만 가져오기
@@ -53,11 +53,11 @@ public class CardService {
 		}
 	}
 
-	// 매개변수에 플레이어의 hand 리스트를 넣어서 
+	// 매개변수에 플레이어의 hand 리스트를 넣어서
 	// 그 리스트에 있는 요소들을 card 에 넣고 getCardValue() 매개변수에 그 card 를 넣어
 	// 카드 점수 산정을 한다 그리고
 	// 각 카드의 value 를 합해 리턴한다
-		public int sumHandValue(List<String> hand) {
+	public int sumHandValue(List<String> hand) {
 		int value = 0;
 		for (String card : hand) {
 			value += getCardValue(card);
@@ -74,7 +74,7 @@ public class CardService {
 		playerDto.playerHand.add(getCard());
 	}
 
-	// 카드 1장 받고 덱에서 그 카드 지우기 
+	// 카드 1장 받고 덱에서 그 카드 지우기
 	public String getCard() {
 		int rndCard = (int) (Math.random() * deck.size());
 		String card = deck.remove(rndCard) + "";
@@ -87,7 +87,7 @@ public class CardService {
 		if (showDealerHand) {
 			System.out.println(playerDto.dealerHand);
 			System.out.println("점수  " + sumHandValue(playerDto.dealerHand));
-		} else { //false 이면 딜러 카드 중 1번 요소만 보여주기
+		} else { // false 이면 딜러 카드 중 1번 요소만 보여주기
 			System.out.printf("[ ? , %s]\n", playerDto.dealerHand.get(1));
 		}
 		System.out.println("[ 플레이어의 카드 ] ");
@@ -101,10 +101,10 @@ public class CardService {
 		while (true) {
 			int dealerScore = sumHandValue(playerDto.dealerHand);
 			int playerScore = sumHandValue(playerDto.playerHand);
-			
+
 			System.out.print("Hit 하려면 1, STOP 하려면 0 을 입력하세요 >>  ");
 			String str = scan.nextLine();
-			int intStr = 0; // 이 변수가 하는 일 : hit 인지 stop 인지를 알려주는 역할  
+			int intStr = 0; // 이 변수가 하는 일 : hit 인지 stop 인지를 알려주는 역할
 			try {
 				intStr = Integer.valueOf(str);
 			} catch (Exception e) {
@@ -119,14 +119,19 @@ public class CardService {
 			if (intStr == 1) {
 				playerDto.playerHand.add(getCard());
 				this.printHand(false);
+				
+				if (sumHandValue(playerDto.dealerHand) < 17) {
+					System.out.println("** 딜러가 카드를 가져갑니다");
+					playerDto.dealerHand.add(getCard());
+				}
 			}
 			
-			if (sumHandValue(playerDto.dealerHand) < 17) {
-				System.out.println("** 딜러가 카드를 가져갑니다");
-				playerDto.dealerHand.add(getCard());
-			} // 여기에 딜러의 점수가 21 초과일때 ,승리가 없음
 			if (sumHandValue(playerDto.playerHand) >= 21) {
 				System.out.println("** 플레이어가 21 초과, 패배 ** ");
+				break;
+			}
+			if (sumHandValue(playerDto.dealerHand) >= 21) {
+				System.out.println("** 딜러가 21 초과, 플레이어 승리 **");
 				break;
 			}
 
